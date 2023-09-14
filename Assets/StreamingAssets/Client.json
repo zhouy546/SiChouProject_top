@@ -1,0 +1,34 @@
+{
+  "Clientvideo": [
+    {
+      "VideoIndex": 0,
+      "udp": "1000",
+      "loop": -1, //1是不循环
+      "url": "pb.mov",
+      "isBackToScreenProtect": false,
+      "iscreenprotect": true
+    }
+  ],
+
+  "clientSyncRange": 2,
+
+  "serverIP": "127.0.0.1",
+
+  "OnPlayDelay": 500,
+
+
+  "TriggerInteractionUDP": "10000",
+
+  "TriggerVideoUDP": "10001",
+
+  "InteractionUDPport": 28010,
+
+  "LocalUdpPort": 29011,
+
+  "ServerTcpPort": 8001,
+
+  "STOPVIDEO": "3001",
+
+  "pause": "2022"
+
+}
