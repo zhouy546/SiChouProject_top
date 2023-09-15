@@ -165,7 +165,7 @@ public class ClickNode : MonoBehaviour
 
             text_Images[index].sprite = textsprite;
 
-            texture_Sprite.Add(textsprite);
+            text_Sprite.Add(textsprite);
 
 
             Sprite titlesprite = await getTexture(path + item.TitleURL);
