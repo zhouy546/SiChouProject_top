@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
+using VideoClient;
 
 public class ClickNode : MonoBehaviour
 {
@@ -16,6 +18,13 @@ public class ClickNode : MonoBehaviour
     public HandCtr handCtr;
     public Image IslandImage;
 
+    public Image introImage;
+    public List<Image> text_Images = new List<Image>();
+
+    public List<Image> texture_Images = new List<Image>();
+
+    public List<Image> Title_Images = new List<Image>();
+
     private bool isFirstShow;
     private bool isShowClick;
     private bool timeLocker;
@@ -23,6 +32,40 @@ public class ClickNode : MonoBehaviour
     public List<Vector3> Handpos=new List<Vector3>();
 
     Coroutine HideCoroutine;
+
+    public enum Interaction_position { left, right }
+
+    public Interaction_position interaction_Position;
+
+    public bool isInfoComplete = true;
+
+    public Sprite introSprite;
+    public List<Sprite> text_Sprite = new List<Sprite>();
+    public List<Sprite> texture_Sprite = new List<Sprite>();
+    public List<Sprite> Title_Sprite = new List<Sprite>();
+
+
+    public void Awake()
+    {
+        EventCenter.AddListener(EventDefine.ini, setupDataFromJson);
+    }
+
+    public void setupDataFromJson()
+    {
+        switch (interaction_Position)
+        {
+            case Interaction_position.left:
+
+                setup(ValueSheet.ConfigRoot.left);
+                break;
+            case Interaction_position.right:
+                setup(ValueSheet.ConfigRoot.right);
+
+                break;
+            default:
+                break;
+        }
+    }
 
     public void Onclick()
     {
@@ -33,7 +76,11 @@ public class ClickNode : MonoBehaviour
         {
             if (timeLocker == false)
             {
-                SecondShowClick();
+                if (isInfoComplete)
+                {
+                    SecondShowClick();
+                }
+
             }
         }
     }
@@ -96,4 +143,74 @@ public class ClickNode : MonoBehaviour
         handCtr.showHand();
     }
 
+    public async void setup(nodes _nodes)
+    {
+        string path = Application.streamingAssetsPath;
+        isInfoComplete = _nodes.isInfoComplete;
+
+        introImage.sprite = introSprite = await getTexture(path + _nodes.introURL);
+
+        foreach (var item in _nodes.JsonNodes)
+        {
+            int index = _nodes.JsonNodes.IndexOf(item);
+
+            Sprite texturesprite = await getTexture(path + item.TextureURL);
+
+            texture_Images[index].sprite = texturesprite;
+
+            texture_Sprite.Add(texturesprite);
+
+
+            Sprite textsprite = await getTexture(path + item.textURL);
+
+            text_Images[index].sprite = textsprite;
+
+            texture_Sprite.Add(textsprite);
+
+
+            Sprite titlesprite = await getTexture(path + item.TitleURL);
+
+            Title_Images[index].sprite = titlesprite;
+
+            Title_Sprite.Add(titlesprite);
+        }
+    }
+
+
+    public async Task<Sprite> getTexture(string url)
+    {
+        Texture2D _texture = await GetRemoteTexture(url);
+        Sprite sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), new Vector2(0.5f, 0.5f));
+
+        return sprite;
+    }
+    public async Task<Texture2D> GetRemoteTexture(string url)
+    {
+        using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(url))
+        {
+            // begin request:
+            var asyncOp = www.SendWebRequest();
+
+            // await until it's done: 
+            while (asyncOp.isDone == false)
+                await Task.Delay(1000 / 30);//30 hertz
+
+            // read results:
+            if (www.isNetworkError || www.isHttpError)
+            {
+                // log error:
+#if DEBUG
+                Debug.Log($"{www.error}, URL:{www.url}");
+#endif
+
+                // nothing to return on error:
+                return null;
+            }
+            else
+            {
+                // return valid results:
+                return DownloadHandlerTexture.GetContent(www);
+            }
+        }
+    }
 }

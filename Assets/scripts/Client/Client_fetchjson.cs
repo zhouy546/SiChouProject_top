@@ -39,6 +39,16 @@ namespace VideoClient
                 ValueSheet.udp_videoinfo.Add(item.udp, item);
             }
 
+            string configurl = Application.streamingAssetsPath + "/config.json";
+
+            WWW Configwww = new WWW(configurl);
+
+            yield return Configwww;
+
+            string ConfigjsonString = Encoding.UTF8.GetString(Configwww.bytes);
+
+            ValueSheet.ConfigRoot = JsonMapper.ToObject<ConfigRoot>(ConfigjsonString);
+
             EventCenter.Broadcast(EventDefine.ini);
         }
     }

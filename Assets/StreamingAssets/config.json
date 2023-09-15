@@ -1,0 +1,31 @@
+{
+  "left": {
+    "isInfoComplete": true,
+    "name": "匈牙利",
+    "introURL": "/Image/1/intro.png",
+    "JsonNodes": [
+      {
+        "textURL":  "/Image/1/text_1.png",
+        "TextureURL": "/Image/1/texture_1.png",
+        "TitleURL":  "/Image/1/title_1.png"
+      },
+      {
+        "textURL":  "/Image/1/text_2.png",
+        "TextureURL": "/Image/1/texture_2.png",
+        "TitleURL":  "/Image/1/title_2.png"
+      }
+    ]
+  },
+  "right": {
+    "isInfoComplete": true,
+    "name": "德国",
+    "introURL": "/Image/2/intro.png",
+    "JsonNodes": [
+      {
+        "textURL":  "/Image/2/text_1.png",
+        "TextureURL": "/Image/2/texture_1.png",
+        "TitleURL":  "/Image/2/title_1.png"
+      }
+    ]
+  }
+}

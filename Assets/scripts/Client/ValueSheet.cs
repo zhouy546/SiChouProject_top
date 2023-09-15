@@ -8,6 +8,10 @@ namespace VideoClient
     {
         public static ClientRoot clientRoot;
 
+        
+        public static ConfigRoot ConfigRoot;
+
+
          public static Dictionary<string, ClientvideoItem> udp_videoinfo = new Dictionary<string, ClientvideoItem>();
 
 
@@ -68,4 +72,33 @@ namespace VideoClient
     }
 
 
+    public class JsonNode
+    {
+
+
+        public string textURL { get; set; }
+
+        public string TextureURL { get; set; }
+
+        public string TitleURL { get; set; }
+    }
+
+    public class nodes
+    {
+        public bool isInfoComplete { get; set; }
+
+        public string introURL { get; set; }
+        public string name { get; set; }
+
+
+        public List<JsonNode> JsonNodes { get; set; }
+
+    }
+
+    public class ConfigRoot
+    {
+        public nodes left { get; set; }
+
+        public nodes right { get; set; }
+    }
 }
