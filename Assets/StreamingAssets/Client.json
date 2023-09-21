@@ -7,6 +7,14 @@
       "url": "pb.mov",
       "isBackToScreenProtect": false,
       "iscreenprotect": true
+    },
+    {
+      "VideoIndex": 1,
+      "udp": "1001",
+      "loop": -1, //1是不循环
+      "url": "video.mov",
+      "isBackToScreenProtect": false,
+      "iscreenprotect": false
     }
   ],
 
@@ -20,8 +28,9 @@
   "TriggerInteractionUDP": "10000",
 
   "TriggerVideoUDP": "10001",
+  "TriggerpbUDP": "10002",
 
-  "InteractionUDPport": 28010,
+  "InteractionUDPport": 27010,
 
   "LocalUdpPort": 29011,
 

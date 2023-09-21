@@ -63,6 +63,11 @@ namespace VideoClient
             {
                 EventCenter.Broadcast(EventDefine.ShowVideo);
             }
+
+            else if (s == ValueSheet.clientRoot.TriggerpbUDP)
+            {
+                EventCenter.Broadcast(EventDefine.ShowPb);
+            }
         }
 
         void OnApplicationQuit()

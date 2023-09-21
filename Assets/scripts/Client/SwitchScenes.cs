@@ -12,6 +12,7 @@ public class SwitchScenes : MonoBehaviour
     void Start()
     {
         EventCenter.AddListener(EventDefine.ShowVideo, HideInterAction);
+        EventCenter.AddListener(EventDefine.ShowPb, HideInterAction);
         EventCenter.AddListener(EventDefine.ShowInteraction, ShowInterAction);
         instance = this;
 

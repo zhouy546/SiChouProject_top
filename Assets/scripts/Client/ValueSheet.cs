@@ -60,6 +60,9 @@ namespace VideoClient
 
         public string TriggerVideoUDP;
 
+
+        public string TriggerpbUDP;
+
         public int InteractionUDPport { get; set; }
 
         public int LocalUdpPort { get; set; }

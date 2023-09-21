@@ -3,6 +3,6 @@ namespace VideoClient
 {
     public enum EventDefine
     {
-        ini,checkFrame, ShowVideo, ShowInteraction
+        ini,checkFrame, ShowVideo, ShowInteraction,ShowPb
     }
 }
